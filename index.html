@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Dynamic Shapes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="credentials">
+    <div class="name">Hamish Cooper</div>
+    <div class="title">Multi-media designer / director</div>
+    <div class="portfolio">Portfolio</div>
+  </div>
+
+  <div id="canvas-wrapper">
+    <button id="back-arrow">←</button>
+    <div id="canvas-scroll-container">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="info-panel">
+      <h1 id="info-title">Title</h1>
+      <h3 id="info-subtitle">Subtitle</h3>
+      <p id="info-meta">Meta Info</p>
+      <p id="info-body">Body text goes here related to the selected shape.</p>
+    </div>
+  </div>
+
+  <script src="shapes.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
