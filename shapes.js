@@ -153,7 +153,7 @@ const shapeConfigs = [
     body: "Keeping track of your alocated area, your goals, your customer and loging responses is easy with the right tools. We've bundled a whole lot more into this one to make life easier for everyone. Be on the lookout.",
     blocks: [
     { type: 'text', content: ' ' },
-    { type: 'videoSrc', src: 'images/hubana/HomeRunE.mp4', cornerRadius: 30 },
+    { type: 'videoSrc', src: 'images/Hubana/HomeRunE.mp4', cornerRadius: 30 },
     { type: 'text', content: ' ' }
     ]
   },
