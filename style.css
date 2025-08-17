@@ -465,13 +465,79 @@ body.detail-open{ overflow-y: auto; }
 
 
 
-/* Ensure loader is visible even before media has intrinsic height */
-.media-wrap.loading,
-.block-media-wrap.loading,
-#info-media .hero-frame.loading{
-  min-height: 100px; /* room for the 100x3 bar and some padding */
+/* === Media loading UI === */
+.media-wrap, .block-media-wrap, #info-media .hero-frame{
+  position: relative;
+}
+.loading-bar{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 100px;
+  height: 3px;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.20);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.loading-bar .loading-fill{
+  height: 100%;
+  width: 0%;
+  background: rgba(255,255,255,0.80);
+  transition: width .2s linear;
+}
+.media-wrap.loading > img,
+.media-wrap.loading > video,
+.block-media-wrap.loading > img,
+.block-media-wrap.loading > video,
+#info-media .hero-frame.loading > img,
+#info-media .hero-frame.loading > video{
+  opacity: 0;
 }
 
-/* Make sure the bar paints above media */
-.loading-bar{ z-index: 2; }
+
+
+/* === Desktop: prevent width jump when opening info-panel === */
+@media (min-width: 821px){
+  /* Keep the page from changing width due to scrollbar toggling */
+  html, body { scrollbar-gutter: stable; }
+  body.detail-open { overflow-y: hidden; } /* we already scroll inside #info-panel */
+  /* Make sure the scroller reserves gutter space as well */
+  #info-panel { scrollbar-gutter: stable; }
+}
+
+
+
+/* === Desktop: keep page width stable when info-panel opens === */
+@media (min-width: 821px){
+  html{
+    overflow-y: scroll;           /* always reserve vertical scrollbar */
+    scrollbar-gutter: stable;     /* keep width stable */
+  }
+  body.base,
+  body.detail-open{
+    overflow-y: hidden;           /* scrolling happens in #info-panel */
+  }
+  #info-panel{
+    scrollbar-gutter: stable;     /* panel's own gutter stays stable */
+  }
+}
+
+
+
+/* === Info-panel blocks: restore 20px rounding and clip children === */
+#info-blocks > .block-media-wrap{
+  border-radius: 20px;
+  overflow: hidden;
+}
+#info-blocks > .block-media-wrap > img,
+#info-blocks > .block-media-wrap > video{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
 

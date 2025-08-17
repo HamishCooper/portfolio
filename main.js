@@ -13,6 +13,86 @@ const credentialsBR = document.getElementById('credentials-br');
 const backgroundOverlay = document.getElementById('background-overlay');
 
 // mobile scroll restore
+
+// === Loader UI utilities ===
+const LOAD_COLORS = ['#EC0B43','#58355E','#7AE7C7','#D6FFB7','#FFF689'];
+function hexToRgba(hex, a){
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!m) return `rgba(255,255,255,${a||1})`;
+  const r = parseInt(m[1],16), g = parseInt(m[2],16), b = parseInt(m[3],16);
+  return `rgba(${r},${g},${b},${a==null?1:a})`;
+}
+function createLoadingBar(){
+  const bar = document.createElement('div');
+  bar.className = 'loading-bar';
+  const fill = document.createElement('div');
+  fill.className = 'loading-fill';
+  bar.appendChild(fill);
+  return { bar, fill };
+}
+function attachMediaLoader(containerEl, mediaEl){
+  // containerEl should be positioned (relative) and sized; we add a bar + bg
+  containerEl.classList.add('loading');
+  const c = LOAD_COLORS[Math.floor(Math.random()*LOAD_COLORS.length)];
+  containerEl.style.background = hexToRgba(c, 0.20);
+
+  const { bar, fill } = createLoadingBar();
+  containerEl.appendChild(bar);
+
+  // simple progress simulation to 80% while waiting
+  let p = 0, done = false, timer = null;
+  function tick(){
+    if (done) return;
+    p = Math.min(80, p + (Math.random()*10 + 8));
+    fill.style.width = p + '%';
+    timer = setTimeout(tick, 180);
+  }
+  timer = setTimeout(tick, 120);
+
+  function finish(){
+    if (done) return;
+    done = true;
+    if (timer) clearTimeout(timer);
+    fill.style.width = '100%';
+    // fade-out bar, clear bg, fade-in media
+    setTimeout(()=>{
+      bar.style.opacity = '0';
+      containerEl.style.background = 'transparent';
+      mediaEl.style.opacity = '1';
+      bar.remove();
+      containerEl.classList.remove('loading');
+    }, 120);
+  }
+
+  // Listen for media readiness
+  if (mediaEl.tagName === 'IMG'){
+    if (mediaEl.complete) finish();
+    else {
+      mediaEl.addEventListener('load', finish, { once:true });
+      mediaEl.addEventListener('error', finish, { once:true });
+      // trigger fetch by touching .src (already set)
+    }
+  } else {
+    // Video
+    const tryBuffered = ()=>{
+      try{
+        if (mediaEl.buffered && mediaEl.duration && mediaEl.duration>0 && mediaEl.buffered.length){
+          const end = mediaEl.buffered.end(mediaEl.buffered.length-1);
+          const frac = Math.max(0, Math.min(1, end / mediaEl.duration));
+          const pct = Math.floor(frac * 95);
+          if (pct > p){ p = pct; fill.style.width = pct + '%'; }
+        }
+      }catch(e){}
+    };
+    if (mediaEl.readyState >= 2) finish();
+    else {
+      mediaEl.addEventListener('loadeddata', finish, { once:true });
+      mediaEl.addEventListener('canplay', finish, { once:true });
+      mediaEl.addEventListener('error', finish, { once:true });
+      mediaEl.addEventListener('progress', tryBuffered);
+    }
+  }
+}
 let savedScrollY = 0;
 
 // ======= EDIT THIS: Desktop column assignment by name or title (case-insensitive) =======
@@ -44,7 +124,15 @@ function createCard(cfg){
   card.style.width=(cfg.width||240)+'px';
   card.style.height=(cfg.height||320)+'px';
   card.style.borderRadius=(cfg.cornerRadiusDefault??24)+'px';
-  const m=document.createElement('div'); m.className='media'; m.appendChild(mediaThumb(cfg)); card.appendChild(m);
+  const m=document.createElement('div'); m.className='media';
+const _mediaEl = mediaThumb(cfg);
+// wrapper to host loader bar
+const wrap = document.createElement('div'); wrap.className='media-wrap'; wrap.style.position='relative'; wrap.style.width='100%'; wrap.style.height='100%';
+wrap.appendChild(_mediaEl);
+_mediaEl.style.opacity = '0'; _mediaEl.style.transition = 'opacity .25s ease';
+attachMediaLoader(wrap, _mediaEl);
+m.appendChild(wrap);
+card.appendChild(m);
   card.addEventListener('click',()=>openDetail(cfg));
   return card;
 }
@@ -132,6 +220,8 @@ frame.style.width = '201px';
 frame.style.overflow = 'hidden';
 frame.appendChild(el);
 infoMedia.appendChild(frame);
+el.style.opacity = '0'; el.style.transition = 'opacity .25s ease';
+attachMediaLoader(frame, el);
 
 // Size the frame so tall media is capped to 50% of viewport height,
 // and crop from the bottom (top-justified).
@@ -178,15 +268,22 @@ window.addEventListener('resize', sizeHero, { passive:true });
   infoBlocks.innerHTML = '';
   (cfg.blocks || []).forEach(b => {
     if (b.type === 'image'){
-      const i = document.createElement('img'); i.src = b.src; infoBlocks.appendChild(i);
+      const i = document.createElement('img'); i.src = b.src; i.style.opacity='0'; i.style.transition='opacity .25s ease';
+const w = document.createElement('div'); w.className='block-media-wrap'; w.style.position='relative'; w.style.width='100%';
+w.appendChild(i);
+attachMediaLoader(w, i);
+infoBlocks.appendChild(w);
     } else if (b.type === 'videoSrc'){
       const v = document.createElement('video');
-      v.src = b.src;
-      // Block videos: user-controlled (no autoplay, not muted)
-      v.playsInline = true;
-      v.controls = true;
-      v.preload = 'metadata';
-      infoBlocks.appendChild(v);
+v.src = b.src;
+v.playsInline = true;
+v.controls = true;
+v.preload = 'metadata';
+v.style.opacity='0'; v.style.transition='opacity .25s ease';
+const w = document.createElement('div'); w.className='block-media-wrap'; w.style.position='relative'; w.style.width='100%';
+w.appendChild(v);
+attachMediaLoader(w, v);
+infoBlocks.appendChild(w);
     } else if (b.type === 'text'){
       const p = document.createElement('p'); p.textContent = b.content || ''; infoBlocks.appendChild(p);
     }
