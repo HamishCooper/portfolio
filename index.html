@@ -1,31 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interactive Dynamic Shapes</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hamish Cooper — Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="credentials">
-    <div class="name">Hamish Cooper</div>
-    <div class="title">Multi-media designer / director</div>
-    <div class="portfolio">Portfolio</div>
-  </div>
+  <!-- Gradient background -->
+  <div id="background-overlay" aria-hidden="true"></div>
 
-  <div id="canvas-wrapper">
-    <button id="back-arrow">←</button>
-    <div id="canvas-scroll-container">
-      <canvas id="canvas"></canvas>
+  <!-- Credentials (keep existing copy; classes match your previous HTML) -->
+  <header id="credentials">
+    <div class="name">Hamish Cooper</div>
+    <div class="title">MULTI-MEDIA DESIGNER / DIRECTOR</div>
+    <div class="portfolio">PORTFOLIO</div>
+  </header>
+
+  <div id="credentials-br">GLOBAL BRAND COMMISSIONS FROM:</div>
+
+  <!-- Back arrow -->
+  <button id="back-arrow" aria-label="Back" title="Back">←</button>
+
+  <!-- Main gallery -->
+  <main id="content">
+    <section id="grid" aria-label="Portfolio grid"></section>
+  </main>
+
+  <!-- Detail panel -->
+  <aside id="info-panel" aria-live="polite" aria-hidden="true">
+    <div id="info-inner">
+      <div id="info-media"></div>
+      <div id="info-meta-col">
+        <h1 id="info-title"></h1>
+        <h3 id="info-subtitle"></h3>
+        <p id="info-meta"></p>
+        <p id="info-body"></p>
+        <div id="info-blocks"></div>
+      </div>
     </div>
-    <div id="info-panel">
-      <h1 id="info-title">Title</h1>
-      <h3 id="info-subtitle">Subtitle</h3>
-      <p id="info-meta">Meta Info</p>
-      <p id="info-body">Body text goes here related to the selected shape.</p>
-    </div>
-  </div>
+  </aside>
+
+  <!-- Brand ticker: single tiled sprite -->
+  <div id="bottom-fade" aria-hidden="true"></div>
+
+  <footer id="brand-ticker" aria-label="Brand marquee">
+    <div class="track"></div>
+  </footer>
 
   <script src="shapes.js"></script>
   <script src="main.js"></script>
