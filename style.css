@@ -465,28 +465,13 @@ body.detail-open{ overflow-y: auto; }
 
 
 
-/* Loader wrapper fixes: sizing + rounded corners on blocks */
-.media-wrap,
-.block-media-wrap{
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+/* Ensure loader is visible even before media has intrinsic height */
+.media-wrap.loading,
+.block-media-wrap.loading,
+#info-media .hero-frame.loading{
+  min-height: 100px; /* room for the 100x3 bar and some padding */
 }
 
-.media-wrap > img,
-.media-wrap > video,
-.block-media-wrap > img,
-.block-media-wrap > video{
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: inherit; /* inherit rounding from parent wrapper */
-}
-
-/* Ensure block media respects the panel's 20px rounding and clips children */
-#info-blocks > .block-media-wrap{
-  border-radius: 20px;
-  overflow: hidden;
-}
+/* Make sure the bar paints above media */
+.loading-bar{ z-index: 2; }
 
