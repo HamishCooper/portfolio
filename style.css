@@ -465,36 +465,28 @@ body.detail-open{ overflow-y: auto; }
 
 
 
-/* === Media loading UI === */
-.media-wrap, .block-media-wrap, #info-media .hero-frame{
+/* Loader wrapper fixes: sizing + rounded corners on blocks */
+.media-wrap,
+.block-media-wrap{
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
-.loading-bar{
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  width: 100px;
-  height: 3px;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.20);
-  border-radius: 2px;
+
+.media-wrap > img,
+.media-wrap > video,
+.block-media-wrap > img,
+.block-media-wrap > video{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit; /* inherit rounding from parent wrapper */
+}
+
+/* Ensure block media respects the panel's 20px rounding and clips children */
+#info-blocks > .block-media-wrap{
+  border-radius: 20px;
   overflow: hidden;
-  opacity: 1;
-  transition: opacity .25s ease;
-  pointer-events: none;
-}
-.loading-bar .loading-fill{
-  height: 100%;
-  width: 0%;
-  background: rgba(255,255,255,0.80);
-  transition: width .2s linear;
-}
-.media-wrap.loading > img,
-.media-wrap.loading > video,
-.block-media-wrap.loading > img,
-.block-media-wrap.loading > video,
-#info-media .hero-frame.loading > img,
-#info-media .hero-frame.loading > video{
-  opacity: 0;
 }
 
