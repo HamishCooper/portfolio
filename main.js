@@ -31,6 +31,12 @@ function createLoadingBar(){
   return { bar, fill };
 }
 function attachMediaLoader(containerEl, mediaEl){
+  // If already ready, don't show loader; just reveal media.
+  const tag = (mediaEl.tagName||'').toUpperCase();
+  const ready = (tag==='IMG') ? (mediaEl.complete && mediaEl.naturalWidth>0)
+                               : (mediaEl.readyState && mediaEl.readyState>=2);
+  if (ready){ mediaEl.style.opacity='1'; containerEl.style.background='transparent'; return; }
+
   // containerEl should be positioned (relative) and sized; we add a bar + bg
   containerEl.classList.add('loading');
   const c = LOAD_COLORS[Math.floor(Math.random()*LOAD_COLORS.length)];

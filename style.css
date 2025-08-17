@@ -500,44 +500,40 @@ body.detail-open{ overflow-y: auto; }
 
 
 
-/* === Desktop: prevent width jump when opening info-panel === */
-@media (min-width: 821px){
-  /* Keep the page from changing width due to scrollbar toggling */
-  html, body { scrollbar-gutter: stable; }
-  body.detail-open { overflow-y: hidden; } /* we already scroll inside #info-panel */
-  /* Make sure the scroller reserves gutter space as well */
-  #info-panel { scrollbar-gutter: stable; }
-}
-
-
-
-/* === Desktop: keep page width stable when info-panel opens === */
-@media (min-width: 821px){
-  html{
-    overflow-y: scroll;           /* always reserve vertical scrollbar */
-    scrollbar-gutter: stable;     /* keep width stable */
-  }
-  body.base,
-  body.detail-open{
-    overflow-y: hidden;           /* scrolling happens in #info-panel */
-  }
-  #info-panel{
-    scrollbar-gutter: stable;     /* panel's own gutter stays stable */
-  }
-}
-
-
-
-/* === Info-panel blocks: restore 20px rounding and clip children === */
+/* Info-panel blocks: proportional scaling + rounding, overriding generic video rules */
 #info-blocks > .block-media-wrap{
   border-radius: 20px;
   overflow: hidden;
+  width: 100%;
 }
-#info-blocks > .block-media-wrap > img,
+#info-blocks > .block-media-wrap > img{
+  display: block;
+  
+  
+  
+   /* do not crop */
+  border-radius: inherit;
+
+  display:block; width:100%; max-width:100%; height:auto; object-fit:contain; border-radius:inherit; }
 #info-blocks > .block-media-wrap > video{
   display: block;
-  width: 100%;
-  height: auto;
+  
+  
+  
+   /* do not crop */
   border-radius: inherit;
+
+  display:block; width:auto; max-width:100%; height:auto; object-fit:contain; border-radius:inherit; margin-left:auto; margin-right:auto; }
+
+
+
+
+@media (min-width: 821px){
+  /* Let video shrink width when capped by height */
+  #info-blocks > .block-media-wrap > video{
+    max-height: 100vh;
+    max-height: 100svh;
+    max-height: 100dvh;
+  }
 }
 
