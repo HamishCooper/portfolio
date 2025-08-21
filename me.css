@@ -1,0 +1,70 @@
+
+/* === meJof.css — ME page styles (scoped) === */
+
+/* Hidden by default */
+#me-page[hidden]{ display: none; }
+
+/* Vertical, responsive layout */
+#me-page{
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: opacity;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap: var(--gap);
+  padding: var(--pad-top) var(--pad-x) var(--ticker-h);
+}
+
+/* Simple grid spans */
+#me-page > .span-12{ grid-column: span 12; }
+#me-page > .span-6{  grid-column: span 12; }
+#me-page > .span-4{  grid-column: span 12; }
+#me-page > .span-3{  grid-column: span 12; }
+
+@media (min-width: 821px){
+  #me-page > .span-6{ grid-column: span 6; }
+  #me-page > .span-4{ grid-column: span 4; }
+  #me-page > .span-3{ grid-column: span 3; }
+}
+
+/* Fade choreography */
+#grid{ transition: opacity 0.3s ease; }
+body.mode-me #grid{ opacity: 0; pointer-events: none; }
+body.mode-me #me-page{ opacity: 1; }
+
+/* Credentials: scroll naturally in ME */
+@media (min-width: 821px){
+  body.mode-me #credentials{
+    position: relative; top: auto; left: auto;
+    transform: none; opacity: 1; pointer-events: auto; z-index: auto;
+    margin: 16px var(--pad-x) 0;
+  }
+}
+@media (max-width: 820px){
+  body.mode-me #credentials{
+    position: relative; top: auto; left: auto;
+    transform: none; opacity: 1; pointer-events: auto; z-index: auto;
+    margin: 16px var(--pad-x) 0;
+  }
+}
+
+/* Optional default block styling */
+#me-page .card{ background: rgba(255,255,255,.06); border-radius: var(--radius); padding: 5px; }
+#me-page img{ width: 100%; height: auto; display: block; border-radius: var(--radius); }
+
+
+/* Immediate credentials offscreen when starting a card open */
+body.detail-opening #credentials{
+  transform: translateX(-30%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* === ME via #info-panel (JS uses .me-open) — surgical add, no overrides === */
+#info-panel{
+  transition: opacity 0.3s ease;
+  will-change: opacity;
+}
+body.me-open #grid{ opacity: 0; pointer-events: none; }
+body.me-open #info-panel{ opacity: 1; }
+
