@@ -174,6 +174,7 @@ const shapeConfigs = [
     width: 200,
     height: 177,
     expandedScale: 1.5,
+    videoSrc: "images/Comic/cloudalpha.mov",
     videoSrc: "images/Comic/cloudlighten.webm",
     noShadow: true,        // disables outer box-shadow on this card
     noInnerShadow: true,   // disables the inner shadow overlay on its media
