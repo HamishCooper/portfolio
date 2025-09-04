@@ -174,7 +174,6 @@ const shapeConfigs = [
     width: 200,
     height: 177,
     expandedScale: 1.5,
-    videoSrc: "images/Comic/cloudalpha.mov",
     videoSrc: "images/Comic/cloudlighten.webm",
     noShadow: true,        // disables outer box-shadow on this card
     noInnerShadow: true,   // disables the inner shadow overlay on its media
@@ -381,7 +380,7 @@ const shapeConfigs = [
     width: 200,
     height: 350,
     expandedScale: 1.5,
-    videoSrc: "images/Knock/loop.mp4",
+    videoSrc: "images/knock/walk.mp4",
     team:  "Name; Hamish Cooper, Role; Design/Construct | Name; Tydus Queiroz, Role; Ideation | Name; Sunobi Developers, Role; Coding",
     tools: "Adobe XD, Photoshop, After Effects, Unity",
     title: "Knock",
