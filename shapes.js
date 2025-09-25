@@ -246,7 +246,7 @@ const shapeConfigs = [
     body: "This tool is built for Reps to quickly build proposals for customers. It's automatic detection and edit capabilities set it apart from other tools along with it's usability and flexability. It can auto generate in seconds and feeds directly into their proposals within our expanded app.",
     blocks: [
     { type: 'text', content: ' ' },
-    { type: 'videoSrc', src: 'images/BatteryTool/BatteryToolQuick.mp4', cornerRadius: 30 },
+    { type: 'videoSrc', src: 'images/DesignTool/designercomp.mp4', cornerRadius: 30 },
     { type: 'text', content: ' ' },
     ]
   },
