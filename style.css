@@ -855,3 +855,5 @@ body.scroll-lock{
   border-radius: inherit;
 }
 
+#credits .tool { white-space: nowrap; }  /* keep “Adobe Illustrator” together */
+#credits .sep  { white-space: normal; }  /* allow wrap at the separator */

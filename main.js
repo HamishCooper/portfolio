@@ -217,8 +217,10 @@ function renderCredits(cfg){
            '<br><br>';
   }
   if (toolsArr.length){
-    out += esc(toolsLabel) + ':<br>' + toolsArr.map(esc).join(SEP);
-  }
+  out += esc(toolsLabel) + ':<br>' +
+         toolsArr.map(t => `<span class="tool">${esc(t)}</span>`)
+                 .join('<span class="sep"> · </span>');
+}
   return out;
 }
 

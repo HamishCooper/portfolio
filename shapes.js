@@ -159,7 +159,7 @@ const shapeConfigs = [
     title: "Zach & Dooey",
     subtitle: "The Jendehya Circuit Part 1",
     meta: "Graphic Novel",
-    body: "Exploring the unimagined via their crepuscular engine. What is strange is normal to these two imagineers. Everything is not what it seems in an adventure of multi-dimensional challlenges. Astory about navigating the strange both at home and beyond time itself.",
+    body: "Exploring the unimagined via their crepuscular engine. What is strange is normal to these two imagineers. Everything is not what it seems in an adventure of multi-dimensional challlenges. A story about navigating the strange both at home and beyond time itself.",
     blocks: [
     { type: 'image', src: 'images/Comic/OpenBook.jpg'},
     { type: 'image', src: 'images/Comic/gnbook.jpg'},
