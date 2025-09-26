@@ -127,12 +127,12 @@ const columnsConfig = {
   col3: ["sales", "sunobi", "cloud"],
   col4: ["tommytooth", "comic"],
   col5: ["orgchart", "monsterpinball", "multiballpinball"],
-  col6: ["timeline","proposal"],
+  col6: ["timeline","eastland"],
   col7: ["spongebabies","flappy","flappyfish"],
   col8: ["hubana", "support"],
   col9: ["themarket","ao"],
   col10: ["paintings","unison"],
-  col11: ["icp", "eastland"]
+  col11: ["icp", "satellite"]
   // Add more columns as needed; entries may be cfg.name or cfg.title.
 };
 // ===============================================================================

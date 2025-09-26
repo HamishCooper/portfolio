@@ -302,6 +302,7 @@ const shapeConfigs = [
     { type: 'text', content: ' ' },
     ]
   },
+  /*
   {
     name: "proposal",
     cornerRadiusDefault: 15,
@@ -320,7 +321,7 @@ const shapeConfigs = [
     { type: 'image', src: 'images/Proposal/ProposalLong.jpg', cornerRadius: 30 },
     { type: 'text', content: ' ' },
     ]
-  },
+  },*/
   {
     name: "hubana",
     cornerRadiusDefault: 15,
