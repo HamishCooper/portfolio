@@ -23,6 +23,7 @@ window.meConfig = [{
     { type: "image", span: 3, src: "images/me/ex/audio.png" },
     { type: "image", span: 3, src: "images/me/ex/experience.png" },
 
+    
     { type: "image", span: 12, src: "images/me/meathome.jpg" },
     { type: "text", span: 8, content: "Yes, that is an old Apple monitor with some painting tools and wood tiles inside." },
     { type: "image", src: "images/me/turfdesk.jpg" },
